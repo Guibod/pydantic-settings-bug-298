@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "test"
+version = "0.1.0"
+description = ""
+authors = ["Guillaume Boddaert <gboddaert@solocal.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+pydantic-settings = "^2.3.0"
+tox = "^4.15.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+envlist = py39,py310,py311,py312
+
+[testenv]
+allowlist_externals = poetry
+commands_pre =
+    poetry install --no-root --sync --with=dev
+commands =
+    poetry run python -m test.test
+"""
