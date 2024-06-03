@@ -6,9 +6,11 @@ authors = ["Guillaume Boddaert <gboddaert@solocal.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.8"
 pydantic-settings = "^2.3.0"
 tox = "^4.15.0"
+injector = "^0.21.0"
+pytest = "^8.2.1"
 
 
 [build-system]
@@ -18,12 +20,12 @@ build-backend = "poetry.core.masonry.api"
 [tool.tox]
 legacy_tox_ini = """
 [tox]
-envlist = py39,py310,py311,py312
+envlist = py38,py39,py310,py311,py312
 
 [testenv]
 allowlist_externals = poetry
 commands_pre =
-    poetry install --no-root --sync --with=dev
+    poetry install --no-root --sync
 commands =
-    poetry run python -m test.test
+    poetry run pytest test/ --import-mode importlib
 """
